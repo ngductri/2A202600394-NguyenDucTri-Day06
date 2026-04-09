@@ -1,4 +1,4 @@
-# Individual reflection — Nguyê ̃n Văn A (AI20K001)
+# Individual reflection — NGUYỄN ĐỨC TRÍ (2A202600394)
 ## 1. Role
 Thiết kế chatbot và thiết lập agent.
 ## 2. Đóng góp cụ thể
@@ -13,28 +13,34 @@ Tôi đã trực tiếp xây dựng hệ thống AI Agent đặt xe thông minh 
 3. Đánh giá chi tiết các thành phần kỹ thuật
 Về mặt công nghệ, việc lựa chọn FastAPI và Expo là sự kết hợp hiện đại, phù hợp cho một prototype cần tốc độ phát triển nhanh. Hệ thống Mapping (Geopy + OSRM) là một lựa chọn thông minh để thay thế các dịch vụ trả phí đắt đỏ như Google Maps trong giai đoạn thử nghiệm, dù độ chính xác của địa chỉ tại Việt Nam có thể là một thách thức. Phần Data giả lập (users.json, services.json) được tổ chức tốt, giúp tách biệt dữ liệu người dùng và bảng giá dịch vụ, tạo điều kiện thuận lợi cho việc mở rộng quy mô hoặc tích hợp database thật sau này. Tuy nhiên, phần AI Agent cần được bổ sung một System Prompt chặt chẽ để đảm bảo kết quả JSON trả về luôn đồng nhất, tránh làm gãy logic của Backend.
 
-## 4. Đóng góp khác- Test prompt với 10 triệu chứng khác nhau, ghi log kê ́t quả vào 
-prompt-tests.md- Giúp Châu debug eval metrics — ban đâ ̀u chi ̉ có "accuracy" chung,
-sau tách ra precision cho từng khoa
-## 5. Điê ̀u học được
-Trước hackathon nghĩ precision và recall chi ̉ là metric kỹ thuật.
-Sau khi thiê ́t kê ́ AI triage mới hiê ̉u: chọn recall cao hơn cho khoa 
-câ ́p cứu
-(bỏ sót nguy hiê ̉m hơn false alarm) nhưng precision cao hơn cho khoa 
-chuyên sâu
-(gợi ý sai gây lãng phí thời gian bệnh nhân). Metric là product 
-decision,
-không chi ̉ engineering decision.
-## 6. Nê ́u làm lại
-Sẽ test prompt sớm hơn — ngày đâ ̀u chi ̉ viê ́t SPEC, đê ́n trưa D6 mới 
-bắt đâ ̀u test prompt.
-Nê ́u test sớm từ tô ́i D5 thì có thê ̉ iterate thêm 2-3 vòng, prompt sẽ 
-tô ́t hơn nhiê ̀u.
-## 7. AI giúp gì / AI sai gì- **Giúp:** dùng Claude đê ̉ brainstorm failure modes — nó gợi ý 
-được "drug interaction"
-mà nhóm không nghĩ ra. Dùng Gemini đê ̉ test prompt nhanh qua AI 
-Studio.- **Sai/mislead:** Claude gợi ý thêm feature "đặt lịch khám" vào 
-chatbot —
-nghe hay nhưng scope quá lớn cho hackathon. Suýt bị scope creep 
-nê ́u không dừng lại.
-Bài học: AI brainstorm tô ́t nhưng không biê ́t giới hạn scope
+## 4. Đóng góp khác
+- Test Mô hình Agent với nhiều cases khác nhau vào prompt_test.md
+- Support kiểm thử và thực nghiệm các mô hình Speech to text như là Gemini
+- Debug phần connect giữa BackEnd và Agent.
+
+## 5. Điều học được sau buổi Hackathon
+Điều giá trị nhất mà em gặt hái được sau buổi Hackathon vừa qua chính là kỹ năng làm việc nhóm và tư duy hệ thống trong một dự án thực tế.
+
+Là một người mới bắt đầu và chưa có nhiều kinh nghiệm 'thực chiến', ban đầu em còn khá bỡ ngỡ với quy trình phát triển sản phẩm (Production Flow). Em từng gặp khó khăn trong việc định hình rõ ràng các thành phần: từ việc xác định dữ liệu đầu vào (input), định dạng đầu ra (output) cho đến cách kết nối nhịp nhàng giữa Backend và Frontend.
+
+Tuy nhiên, quá trình xây dựng AI Agent tại Hackathon đã giúp em thay đổi hoàn toàn tư duy. Em nhận ra rằng để phát triển một hệ thống End-to-End hoàn chỉnh, một kỹ sư AI không chỉ tập trung vào mô hình mà còn cần có kiến thức nền tảng về cả Backend lẫn Frontend. Điều này giúp em biết cách thiết kế format dữ liệu chuẩn xác để Agent có thể tiếp nhận thông tin từ hệ thống và phản hồi giao diện một cách tối ưu nhất.
+
+Đặc biệt, đây cũng là cơ hội tuyệt vời để em áp dụng các kiến thức chuyên sâu đã học như:
+LangGraph: Để thiết kế các luồng xử lý phức tạp.
+Function Calling & Tool Calling: Giúp Agent có khả năng tương tác với các công cụ bên ngoài.
+Vòng lặp (Looping mechanism): Đảm bảo Agent thực hiện tác vụ liên tục cho đến khi thỏa mãn điều kiện đầu ra.
+Vượt qua những bối rối ban đầu, buổi Hackathon đã giúp em kết nối các 'mảnh ghép' kiến thức rời rạc thành một bức tranh toàn cảnh về quy trình xây dựng sản phẩm thực tế.
+
+## 6. Nếu làm lại, đổi gì ?
+Nếu được làm lại em mong muốn xây dựng 1 system đơn giản hơn thay vì phải sử dụng backend, frontend bằng cách sử dụng Streamlit. Tại vì em nhận thấy nhóm em chưa có kinh nghiệm nhiều để xử lý việc kết nối giữa FrontEnd -> Agent -> Backend làm cho công việc của BackEnd trở nên nặng nề hơn nhiều nên là tụi em sẽ sửa chữa bằng cách sử dụng một thư việc nào đó để giảm gánh nặng xử lý hơn. Ngoài ra em mong muốn sẽ có thời gian để thực nghiệm và research nhiều mô hình speech to text và agent tốt hơn cho ra kết quả tốt hơn không bị ảo giác hay bị sai kết quả nữa.
+## 7. AI giúp gì / AI sai gì
+AI giúp rất nhiều:
+- Giúp việc code trở nên nhanh hơn và có thể chính xác hơn và dễ dàng hơn.
+- Nâng cao và mở rộng tư duy vận hành một end-to-end system.
+- Define vấn đề và debate mindset.
+
+AI sai gì:
+- Generate code và tự động xóa sửa code nếu không biết prompt đúng làm mất logic code ban đầu
+- AI có thể khẳng định đã thực hiện xong một tác vụ ở Backend (như "Đã đặt hàng thành công") trong khi thực tế Tool đó vừa trả về lỗi. (Nếu không bắt lỗi "error handling" kỹ).
+- Sau một vòng lặp dài, AI có thể quên mất mục tiêu ban đầu của người dùng và đưa ra câu trả lời đi chệch hướng.
+- Làm cho người dùng không hiểu code, lạm dụng AI. Ví dụ một lỗi sơ đẳng không tìm thấy path của file system_prompt.txt lại bị AI sửa quá lên làm sai lại càng sai, bug lại càng nhiều bug.
